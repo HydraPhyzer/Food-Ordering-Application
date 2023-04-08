@@ -3,31 +3,31 @@ import React from "react";
 
 const Items = [
   {
-    Image: require("../assets/Images/ShoppingBag.png"),
+    Image: require("../../assets/Images/ShoppingBag.png"),
     Value: "Pick-Up",
   },
   {
-    Image: require("../assets/Images/SoftDrink.png"),
+    Image: require("../../assets/Images/SoftDrink.png"),
     Value: "Soft-Drinks",
   },
   {
-    Image: require("../assets/Images/Bread.png"),
+    Image: require("../../assets/Images/Bread.png"),
     Value: "Bread",
   },
   {
-    Image: require("../assets/Images/FastFood.png"),
+    Image: require("../../assets/Images/FastFood.png"),
     Value: "Fast-Food",
   },
   {
-    Image: require("../assets/Images/Deals.png"),
+    Image: require("../../assets/Images/Deals.png"),
     Value: "Deals",
   },
   {
-    Image: require("../assets/Images/Coffee.png"),
+    Image: require("../../assets/Images/Coffee.png"),
     Value: "Coffee",
   },
   {
-    Image: require("../assets/Images/Desserts.png"),
+    Image: require("../../assets/Images/Desserts.png"),
     Value: "Desserts",
   },
 ];

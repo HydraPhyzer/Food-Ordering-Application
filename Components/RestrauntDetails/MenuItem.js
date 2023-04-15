@@ -1,6 +1,15 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
-import { Divider } from "react-native-elements";
+import { CheckBox, Divider } from "react-native-elements";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { useDispatch, useSelector } from "react-redux";
 
 const Foods = [
   {
@@ -122,12 +131,40 @@ const Styles = StyleSheet.create({
   },
 });
 
-export default function MenuItem() {
+export default function MenuItem({ RestrauntName }) {
+  const Dispatch = useDispatch();
+
+  const SelectItem = (Item, CheckBoxValue) => {
+    Dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        ...Item,
+        RestrauntName: RestrauntName,
+        CheckBoxValue: CheckBoxValue,
+      },
+    });
+  };
+
+  const CartItems = useSelector(
+    (State) => State.CartReducer.SelectedItems.Items
+  );
+
+  const IsFoodInCart = (Food, CartItem) =>
+    Boolean(CartItem.find((Item) => Item.name == Food.name));
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {Foods.map((EachFood, Ind) => {
         return (
           <View style={Styles.MenuItemStyles} key={Ind}>
+            <BouncyCheckbox
+              size={15}
+              fillColor="green"
+              style={{ alignSelf: "flex-start", marginRight: 10, marginTop: 1 }}
+              iconStyle={{ borderRadius: 0, borderColor: "black" }}
+              isChecked={IsFoodInCart(EachFood, CartItems)}
+              onPress={(CheckBoxValue) => SelectItem(EachFood, CheckBoxValue)}
+            />
             <FoodInfo
               Title={EachFood.name}
               Desc={EachFood.description}
@@ -137,7 +174,6 @@ export default function MenuItem() {
           </View>
         );
       })}
-      <Divider width={1} style={{ marginVertical: 20 }} />
     </ScrollView>
   );
 }
@@ -151,7 +187,7 @@ const FoodInfo = ({ Title, Desc, Price }) => (
     }}
   >
     <Text style={Styles.TitleStyle}>{Title}</Text>
-    <Text style={{ width: 220, textAlign: "justify" }}>{Desc}</Text>
+    <Text style={{ width: 200, textAlign: "justify" }}>{Desc}</Text>
     <Text>{`Price : $ ${Price}`}</Text>
   </View>
 );

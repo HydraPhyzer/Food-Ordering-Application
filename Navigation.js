@@ -4,19 +4,30 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "./Screens/Home";
 import RestrauntDetails from "./Screens/RestrauntDetails";
 
-export default function ReactNavigation(){
-    const Stack=createStackNavigator();
+// import { Provider as ReduxProvider } from "react-redux";
+// import configureStore from "./Redux/Store";
+// const store = configureStore();
 
-    const ScreenOption={
-        headerShown:false,
-    }
 
-    return(
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={ScreenOption} initialRouteName="Home">
-                <Stack.Screen name="Home" component={Home}/>
-                <Stack.Screen name="RestrauntDetail" component={RestrauntDetails}/>
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+import { Provider as ReduxProvider } from 'react-redux'
+import Store from "./Redux/Store";
+
+
+export default function ReactNavigation() {
+  const Stack = createStackNavigator();
+
+  const ScreenOption = {
+    headerShown: false,
+  };
+
+  return (
+    <ReduxProvider store={Store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={ScreenOption} initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="RestrauntDetail" component={RestrauntDetails} />
+        </Stack.Navigator> 
+      </NavigationContainer>
+    </ReduxProvider>
+  );
 }

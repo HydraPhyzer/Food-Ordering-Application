@@ -3,12 +3,6 @@ import React from "react";
 import { Divider } from "react-native-elements";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const ImageLink =
-  "https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80";
-
-const Title = "Farmhouse Chicken Thai";
-const Desc = "Thai . Comfort Food . $$ . 4 💵 ⭐ (2913+)";
-
 export default function About(Props) {
   const { Name, ImageURL, Price, Reviews, Rating, Categories } =
     Props.route.params;
@@ -29,7 +23,6 @@ export default function About(Props) {
         style={{
           display: "flex",
           flexDirection: "row",
-          backgroundColor: "black",
           marginHorizontal: 10,
           padding: 5,
           alignSelf: "flex-start",
@@ -73,7 +66,7 @@ const RestrauntImage = ({ ImageURI }) => (
       source={{
         uri: ImageURI,
       }}
-      style={{ width: "100%", height: 230 }}
+      style={{ width: "100%", height: 200 }}
       borderRadius={5}
     />
   </>
@@ -102,7 +95,7 @@ const RestrauntDesc = ({ Desc }) => (
     style={{
       fontSize: 12,
       fontWeight: "400",
-      marginTop: 10,
+      marginTop: 5,
       marginHorizontal: 10,
       padding: 5,
       alignSelf: "flex-start",

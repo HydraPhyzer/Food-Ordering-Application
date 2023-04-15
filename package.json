@@ -17,11 +17,15 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.6",
+    "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-google-places-autocomplete": "^2.5.1",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.10"
+    "react-native-web": "~0.18.10",
+    "react-redux": "^7.2.5",
+    "redux": "^4.2.1",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

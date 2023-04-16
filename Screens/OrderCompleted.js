@@ -42,24 +42,6 @@ export default function OrderCompleted() {
     currency: "USD",
   });
 
-  //   useEffect(async () => {
-  //     try {
-  //       const querySnapshot = await getDocs(
-  //         collection(db, "Orders"),
-  //         orderBy("Timestamp", "desc"),
-  //         limit(1)
-  //       );
-  //       const Unsub = querySnapshot.docs.map((doc) => {
-  //         setLastOrder(doc.data());
-  //       });
-  //       return () => {
-  //         unsubscribe();
-  //       };
-  //     } catch (e) {
-  //       alert("Error Getting Document");
-  //     }
-  //   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

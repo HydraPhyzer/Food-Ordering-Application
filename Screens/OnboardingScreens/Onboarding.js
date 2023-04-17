@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ImageBackground, Image, Animated } from "react-native";
-import { constants, images, FONTS, SIZES, COLORS } from "../../Constants";
+import { constants, images, SIZES, COLORS } from "../../Constants";
 import { TextButton } from "../../Components";
 
 export default function Onboarding({ navigation }) {
@@ -204,7 +204,7 @@ export default function Onboarding({ navigation }) {
                   paddingHorizontal: SIZES.radius,
                 }}
               >
-                <Text style={{ ...FONTS.h1, fontSize: 16, fontWeight: "700" }}>
+                <Text style={{ fontSize: 16, fontWeight: "700" }}>
                   {item.title}
                 </Text>
 
@@ -214,7 +214,6 @@ export default function Onboarding({ navigation }) {
                     textAlign: "center",
                     color: COLORS.darkGray,
                     paddingHorizontal: SIZES.padding,
-                    ...FONTS.body3,
                   }}
                 >
                   {item.description}

@@ -53,7 +53,6 @@ export default function AuthLayout({
 
         {children}
       </KeyboardAwareScrollView>
-      {/* <Text>{Title}</Text> */}
     </View>
   );
 }

@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Styles = StyleSheet.create({
   image: {
-    mamrginLeft: 5,
+    marginLeft: 5,
     width: 20,
     height: 20,
     tintColor: COLORS.black,

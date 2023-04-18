@@ -7,14 +7,21 @@ import RestrauntItem, {
   LocalRestaurants,
 } from "../Components/Home/RestrauntItem";
 import BottomTabs from "../Components/Home/BottomTabs";
+import { useSelector } from "react-redux";
+
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+// LogBox.ignoreAllLogs();
 
 const APIKEY =
   "zVHspvReyc-yx-oNVu-Xp0EIM5OvqdgUipY3riVhjWniukm5DvFbliz_GqILDWmIPL3kpnDeItt0SAVo0mBgO9WWS6b-yxnkpIgqQVyQy6cDd9Yr2DfG-MfrQPwqZHYx";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const [RestrauntData, setRestrauntData] = useState([...LocalRestaurants]);
   const [City, setCity] = useState("SanDiego");
   const [ActiveTab, setActiveTab] = useState("Delivery");
+
+  const MyUser = useSelector((State) => State.CartReducer.User);
 
   const GetRestrauntData = async () => {
     const YelpURL = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${City}`;
@@ -40,11 +47,16 @@ export default function Home({navigation}) {
   };
 
   useEffect(() => {
-    GetRestrauntData();
-    if (!City) {
-      setCity("SanDiego");
+    if (Object.keys(MyUser).length==0) {
+      navigation.navigate("SignIn");
+    } else {
+      GetRestrauntData();
+      if (!City) {
+        setCity("SanDiego");
+      }
     }
   }, [City, ActiveTab]);
+
   return (
     <SafeAreaView
       style={{
@@ -64,7 +76,7 @@ export default function Home({navigation}) {
       </ScrollView>
 
       <View style={{ backgroundColor: "white" }}>
-        <BottomTabs />
+        <BottomTabs navigation={navigation} mv={5} mh={15} />
       </View>
     </SafeAreaView>
   );

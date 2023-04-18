@@ -1,11 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import AuthLayout from "./AuthLayout";
 import { SIZES, COLORS, icons } from "../../Constants";
 import FormInput from "../../Components/FormInput";
 import { utils } from "../../Utils";
 import TextButton from "../../Components/TextButton";
 import TextIconButton from "../../Components/TextIconButton";
+import { auth } from "../../Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch} from "react-redux";
 
 export default function SignIn({ navigation }) {
   const [Email, setEmail] = React.useState("");
@@ -16,6 +19,39 @@ export default function SignIn({ navigation }) {
   function IsEnabledSignIn() {
     return Email != "" && Password != "" && EmailError == "";
   }
+  const Dispatch = useDispatch();
+  
+  auth.onAuthStateChanged((Use) => {
+    Dispatch({
+      type: "ADD_USER",
+      payload: {
+        User: Use,
+      },
+    });
+  });
+  
+
+  let SignInWithEmailandPassword = () => {
+    signInWithEmailAndPassword(auth, Email, Password)
+      .then((userCredential) => {
+        const User = userCredential.user;
+
+        Dispatch({
+          type: "ADD_USER",
+          payload: {
+            User: User,
+          },
+        });
+
+        navigation.navigate("Home")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(`${errorCode} Means ${errorMessage}`);
+      });
+  };
   return (
     <AuthLayout
       Title="Let's Sign You In"
@@ -90,6 +126,7 @@ export default function SignIn({ navigation }) {
               : COLORS.transparentPrimary,
           }}
           disabled={IsEnabledSignIn() ? false : true}
+          onPress={SignInWithEmailandPassword}
         />
 
         <View
@@ -124,7 +161,7 @@ export default function SignIn({ navigation }) {
           iconStyle={{ tintColor: null }}
           label="Continue With Google"
           labelstyle={{ marginLeft: SIZES.radius }}
-          onPress={() => alert("Google")}
+          onPress={SignInWithEmailandPassword}
         />
       </View>
     </AuthLayout>

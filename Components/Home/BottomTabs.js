@@ -2,15 +2,15 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default function BottomTabs() {
+export default function BottomTabs({ navigation, mv, mh }) {
   return (
     <View
       style={{
         backgroundColor: "black",
         borderRadius: 10,
-        marginHorizontal: 15,
+        marginHorizontal: mh,
         padding: 5,
-        marginVertical: 5,
+        marginVertical: mv,
         elevation: 5,
       }}
     >
@@ -22,17 +22,29 @@ export default function BottomTabs() {
           justifyContent: "space-between",
         }}
       >
-        <Icon Name="home" Value="Home" />
-        <Icon Name="search" Value="Browse" />
-        <Icon Name="receipt" Value="Orders" />
-        <Icon Name="user-alt" Value="Account" />
+        <Icon Name="home" Value="Home" navigation={navigation} />
+        <Icon Name="heart" Value="Browse" navigation={navigation} />
+        <Icon Name="receipt" Value="Orders" navigation={navigation} />
+        <Icon Name="user-alt" Value="Account" navigation={navigation} />
       </View>
     </View>
   );
 }
 
-const Icon = ({ Name, Value }) => (
-  <TouchableOpacity>
+const Icon = ({ Name, Value, navigation }) => (
+  <TouchableOpacity
+    onPress={() => {
+      Name == "user-alt"
+        ? navigation.navigate("Accounts")
+        : Name == "home"
+        ? navigation.navigate("Home")
+        : Name == "heart"
+        ? navigation.navigate("LikedRestraunts")
+        : Name == "receipt"
+        ? navigation.navigate("Receipt")
+        : "";
+    }}
+  >
     <View>
       <FontAwesome5
         name={Name}
@@ -40,7 +52,6 @@ const Icon = ({ Name, Value }) => (
         color="#ecf0f1"
         style={{ alignSelf: "center" }}
       />
-      {/* <Text style={{ fontSize: 12, fontWeight: "500",color:"white" }}>{Value}</Text> */}
     </View>
   </TouchableOpacity>
 );

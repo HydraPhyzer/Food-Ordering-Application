@@ -6,8 +6,13 @@ import FormInput from "../../Components/FormInput";
 import TextButton from "../../Components/TextButton";
 import TextIconButton from "../../Components/TextIconButton";
 import { utils } from "../../Utils";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase";
+import { useDispatch } from "react-redux";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../../Firebase";
 
-export default function SignUp({navigation}) {
+export default function SignUp({ navigation }) {
   const [UserName, setUserName] = React.useState("");
   const [UserNameError, setUserNameError] = React.useState("");
   const [Email, setEmail] = React.useState("");
@@ -23,9 +28,47 @@ export default function SignUp({navigation}) {
       Password != "" &&
       EmailError == "" &&
       PasswordError == "" &&
-      UserNameError==""
+      UserNameError == ""
     );
   }
+
+  auth.onAuthStateChanged((Use) => {
+    Dispatch({
+      type: "ADD_USER",
+      payload: {
+        User: Use,
+      },
+    });
+  });
+  const Dispatch = useDispatch();
+
+  let SignUpWithEmailandPassword = async () => {
+    createUserWithEmailAndPassword(auth, Email, Password)
+      .then(async (userCredential) => {
+        const User = userCredential.user;
+
+        Dispatch({
+          type: "ADD_USER",
+          payload: {
+            User: User,
+          },
+        });
+
+        navigation.navigate("Home");
+
+        await setDoc(doc(db, User.uid, User.uid), {
+          UserID:User.uid,
+          Name: UserName,
+          Email:Email
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(`${errorCode} Means ${errorMessage}`);
+      });
+  };
   return (
     <AuthLayout
       Title="Getting Started"
@@ -134,6 +177,7 @@ export default function SignUp({navigation}) {
               : COLORS.transparentPrimary,
           }}
           disabled={IsEnabledSignUp() ? false : true}
+          onPress={SignUpWithEmailandPassword}
         />
 
         <View
@@ -168,7 +212,7 @@ export default function SignUp({navigation}) {
           iconStyle={{ tintColor: null }}
           label="Continue With Google"
           labelstyle={{ marginLeft: SIZES.radius }}
-          onPress={() => alert("Google")}
+          onPress={SignUpWithEmailandPassword}
         />
       </View>
     </AuthLayout>

@@ -13,7 +13,8 @@ export default function AuthLayout({
     <View
       style={{
         flex: 1,
-        paddingVertical: SIZES.padding,
+        // paddingVertical: SIZES.padding,
+        paddingTop: SIZES.padding,
         backgroundColor: COLORS.white,
       }}
     >
@@ -21,7 +22,8 @@ export default function AuthLayout({
         keyboardDismissMode="on-drag"
         contentContainerStyle={{
           flex: 1,
-          paddingHorizontal: SIZES.padding,
+          // paddingHorizontal: SIZES.padding,
+          paddingHorizontal: 15,
         }}
       >
         <View

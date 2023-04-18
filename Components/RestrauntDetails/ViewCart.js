@@ -25,10 +25,12 @@ export default function ViewCart({ navigation }) {
     currency: "USD",
   });
 
+  const MyUser = useSelector((State) => State.CartReducer.User);
+
   const AddOrderToFirebase = async () => {
     setLoading(true);
     try {
-      const docRef = await addDoc(collection(db, "Orders"), {
+      const docRef = await addDoc(collection(db, MyUser.uid), {
         Items: Items,
         RestrauntName: RestrauntName,
         Timestamp: serverTimestamp(),

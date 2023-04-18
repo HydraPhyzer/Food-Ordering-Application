@@ -16,6 +16,8 @@ const FormInput = ({
   autoCompleteType = "off",
   errorMsg = "",
   autoCapitalize = "none",
+  disabled,
+  initvalue
 }) => {
   return (
     <View style={{ ...containerStyle }}>
@@ -37,6 +39,7 @@ const FormInput = ({
         {prependComponent}
 
         <TextInput
+          editable={disabled}
           style={{ flex: 1, ...inputStyle }}
           placeholder={placeholder}
           placeholderTextColor={COLORS.gray}
@@ -45,6 +48,7 @@ const FormInput = ({
           autoCompleteType={autoCompleteType}
           autoCapitalize={autoCapitalize}
           onChangeText={(Tex) => onChange(Tex)}
+          value={initvalue}
         />
 
         {appendComponent}

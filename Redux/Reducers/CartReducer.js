@@ -3,6 +3,7 @@ let DefaultState = {
     Items: [],
     RestrauntName: "",
   },
+  User: {},
 };
 let CartReducer = (State = DefaultState, Action) => {
   switch (Action.type) {
@@ -29,6 +30,13 @@ let CartReducer = (State = DefaultState, Action) => {
           RestrauntName: Action.payload.RestrauntName,
         };
       }
+      return NewState;
+    }
+
+    case "ADD_USER": {
+      let NewState = { ...State };
+      NewState.User = Action.payload.User;
+
       return NewState;
     }
 

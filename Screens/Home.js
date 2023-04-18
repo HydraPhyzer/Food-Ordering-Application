@@ -9,8 +9,8 @@ import RestrauntItem, {
 import BottomTabs from "../Components/Home/BottomTabs";
 import { useSelector } from "react-redux";
 
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']);
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]);
 // LogBox.ignoreAllLogs();
 
 const APIKEY =
@@ -47,8 +47,8 @@ export default function Home({ navigation }) {
   };
 
   useEffect(() => {
-    if (Object.keys(MyUser).length==0) {
-      navigation.navigate("SignIn");
+    if (Object.keys(MyUser).length == 0) {
+      navigation.replace("OnBoarding");
     } else {
       GetRestrauntData();
       if (!City) {

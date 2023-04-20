@@ -49,12 +49,14 @@ export default function Home({ navigation }) {
   useEffect(() => {
     if (Object.keys(MyUser).length == 0) {
       navigation.replace("OnBoarding");
-    } else {
+    } 
+    else {
       GetRestrauntData();
       if (!City) {
         setCity("SanDiego");
       }
     }
+
   }, [City, ActiveTab]);
 
   return (

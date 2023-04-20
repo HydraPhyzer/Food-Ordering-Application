@@ -4,6 +4,7 @@ let DefaultState = {
     RestrauntName: "",
   },
   User: {},
+  FavouruteRestraunts: [],
 };
 let CartReducer = (State = DefaultState, Action) => {
   switch (Action.type) {
@@ -37,6 +38,12 @@ let CartReducer = (State = DefaultState, Action) => {
       let NewState = { ...State };
       NewState.User = Action.payload.User;
 
+      return NewState;
+    }
+
+    case "ADD_FAV": {
+      let NewState = { ...State };
+      NewState.FavouruteRestraunts = Action.payload.ID;
       return NewState;
     }
 

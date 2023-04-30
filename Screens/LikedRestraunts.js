@@ -148,7 +148,7 @@ export default function LikedRestraunts({ navigation }) {
             <View
               key={Ind}
               style={{
-                borderColor: COLORS.primary,
+                borderColor: COLORS.lightGray1,
                 borderWidth: 1,
                 margin: 5,
                 borderRadius: SIZES.radius / 2,
